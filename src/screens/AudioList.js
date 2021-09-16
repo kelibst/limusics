@@ -8,7 +8,6 @@ export default function AudioList() {
     const audioFiles = useContext(AudioContext)
     const [selectedId, setSelectedId] = useState(null);
 
-
     const renderItem = ({ item }) => {
         const backgroundColor = item.albumId === selectedId ? '#6e3b6e' : '#f9c2ff';
     
@@ -17,12 +16,11 @@ export default function AudioList() {
     return (
         <SafeAreaView style={globalStyles.container}>
         <FlatList 
-            data={audioFiles}
+            data={audioFiles.audioFiles}
             renderItem = {renderItem}
-            keyExtractor={item => item.id}
+            keyExtractor={item =>  item.id}
             extraData={selectedId}
             />
-            {console.log(audioFiles)}
         </SafeAreaView>
     )
 }

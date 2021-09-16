@@ -1,11 +1,11 @@
 import React from 'react'
-import { Text } from 'react-native'
+import { Text, TouchableOpacity } from 'react-native'
+import { globalStyles } from '../styles/globalStyles';
 
 
 const Item = ({ item, onPress, style }) => (
-    <TouchableOpacity onPress={onPress} style={[ style]}>
-      <Text style={styles.title}>{item.filename}</Text>
-      <Text>Sometext</Text>
+    <TouchableOpacity onPress={onPress} style={[globalStyles.itemStyle]}>
+      <Text style={globalStyles.title}>{item.filename}</Text>
     </TouchableOpacity>
   );
 
