@@ -17,6 +17,7 @@ export default function AudioList() {
         <SafeAreaView style={globalStyles.container}>
         <FlatList 
             data={audioFiles.audioFiles}
+            initialNumToRender={5}
             renderItem = {renderItem}
             keyExtractor={item =>  item.id}
             extraData={selectedId}

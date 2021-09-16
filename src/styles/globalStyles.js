@@ -9,12 +9,35 @@ const globalStyles = StyleSheet.create({
     title: {
         fontWeight: "bold",
         fontSize: 14,
+
     },
     itemStyle: {
         backgroundColor: "white",
         borderRadius: 5,
+        maxWidth: "95%",
         padding: 10,
         marginBottom: 10,
+        marginHorizontal: 10,
+        flexDirection: "row",
+        alignItems: "center"
+    },
+    itemCont: {
+        maxWidth: "65%",
+    },
+    playIcon: {
+        alignSelf: "center",
+        marginHorizontal: 10
+    },
+    thumbnail: {
+        textTransform: "capitalize",
+        color: "#fff",
+        fontSize: 20
+    },
+    thumb: {
+        paddingHorizontal: 18,
+        paddingVertical: 10,
+        backgroundColor: "#ddd",
+        borderRadius: 50,
         marginHorizontal: 10
     }
 })
