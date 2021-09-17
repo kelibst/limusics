@@ -1,5 +1,5 @@
 import React, { useContext, useState} from 'react'
-import { View, Text, FlatList, TouchableOpacity, SafeAreaView } from 'react-native'
+import { View, Text, FlatList, SafeAreaView } from 'react-native'
 import { AudioContext } from '../context/AudioProvider'
 import { globalStyles } from '../styles/globalStyles'
 import Item from './Item'
@@ -9,9 +9,8 @@ export default function AudioList() {
     const [selectedId, setSelectedId] = useState(null);
 
     const renderItem = ({ item }) => {
-        const backgroundColor = item.albumId === selectedId ? '#6e3b6e' : '#f9c2ff';
-    
-        return <Item item={item} onPress={() => setSelectedId(item.albumId)} style={{ backgroundColor }} />;
+        let sel = item.id === selectedId ?  true : false;
+        return <Item item={item} onPress={() => setSelectedId(item.id)} sel={sel} />;
       };
     return (
         <SafeAreaView style={globalStyles.container}>
