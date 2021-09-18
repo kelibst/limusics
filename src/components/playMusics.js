@@ -12,7 +12,6 @@ const handleMusic = async (item, setMusic, music) => {
             playbackObj: playBackObj,
             currentAudio: item
         })
-
     }
 
     if (soundObj.isLoaded && soundObj.isPlaying){
@@ -24,8 +23,9 @@ const handleMusic = async (item, setMusic, music) => {
             soundObj: status,
         }) 
     }else if(soundObj.isLoaded && !soundObj.isPlaying && currentAudio.id === item.id) {
-       const status =  playbackObj.playAsync();
+       const status = await  playbackObj.playAsync();
        return  setMusic({
+           ...music,
         soundObj: status
     })
     }
