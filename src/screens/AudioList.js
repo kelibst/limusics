@@ -9,13 +9,13 @@ export default function AudioList() {
     const cont = useContext(AudioContext)
     const [selectedId, setSelectedId] = useState(null);
     const { updateState } = cont
-   
     const renderItem = ({ item }) => {
         let sel = item.id === selectedId ?  true : false;
         return <Item item={item} onPress={() => {
             setSelectedId(item.id)
+
             handleMusic(item, updateState, cont.currentState)
-        }} sel={sel} />;
+        }} sel={sel} isPlaying={cont.currentState.playing}/>;
       };
     return (
         <SafeAreaView style={globalStyles.container}>

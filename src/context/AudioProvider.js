@@ -12,11 +12,11 @@ export class AudioProvider extends Component {
       playbackObj: null,
       soundObj: null,
       currentAudio: {},
+      playing: false
     };
   }
 
   updateState= (prevState, newState) => {
-    console.log(prevState, newState)
     this.setState({
       ...prevState, ...newState
     })
@@ -65,7 +65,6 @@ export class AudioProvider extends Component {
     this.getPermission();
   }
   render() {
-    const { playbackObj, soundObj, audioFiles, currentAudio } = this.state;
     return (
       <AudioContext.Provider
         value={{ currentState: this.state, updateState: this.updateState }}

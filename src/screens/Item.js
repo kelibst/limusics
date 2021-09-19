@@ -4,7 +4,7 @@ import { globalStyles } from '../styles/globalStyles';
 import { FontAwesome } from '@expo/vector-icons';
 import { autoGenHex, convertMinsToHrsMins, getThumbNail } from '../funtionalities/funtionalities';
 
-const Item = ({ item, onPress, sel }) => { 
+const Item = ({ item, onPress, sel, isPlaying }) => { 
   return (
     <TouchableOpacity onPress={onPress} style={[globalStyles.itemStyle, sel && {borderWidth: 1, borderColor: "blue"}]}>
       <View  style={[globalStyles.thumb, autoGenHex()]}><Text style={globalStyles.thumbnail}>{getThumbNail(item.filename)}</Text></View>
@@ -14,7 +14,7 @@ const Item = ({ item, onPress, sel }) => {
       </View>
       
       
-      <FontAwesome name="play-circle-o" size={34} color={sel ? "blue" : "black"} style={globalStyles.playIcon}/>
+      <FontAwesome name={isPlaying && sel ? "pause-circle" : "play-circle-o"} size={34} color={sel ? "blue" : "black"} style={globalStyles.playIcon}/>
     </TouchableOpacity>
   )};
 
