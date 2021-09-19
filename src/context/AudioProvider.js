@@ -15,6 +15,13 @@ export class AudioProvider extends Component {
     };
   }
 
+  updateState= (prevState, newState) => {
+    console.log(prevState, newState)
+    this.setState({
+      ...prevState, ...newState
+    })
+  }
+
   perAlert = () => {
     Alert.alert("Permission Required!", "We need to read your audio files.", [
       {
@@ -61,7 +68,7 @@ export class AudioProvider extends Component {
     const { playbackObj, soundObj, audioFiles, currentAudio } = this.state;
     return (
       <AudioContext.Provider
-        value={{ audioFiles, currentAudio, soundObj, playbackObj }}
+        value={{ currentState: this.state, updateState: this.updateState }}
       >
         {this.props.children}
       </AudioContext.Provider>

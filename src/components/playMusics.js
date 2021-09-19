@@ -1,12 +1,11 @@
 import { Audio } from 'expo-av';
-const handleMusic = async (item, setMusic, music) => {
+const handleMusic = async (item, updateState, music) => {
     const { soundObj, playbackObj, currentAudio } = music
-
     if(soundObj === null ){
         const playBackObj = new Audio.Sound()
         const status = await playBackObj.loadAsync({uri: item.uri}, {shouldPlay: true})
     
-       return  setMusic({
+       return  updateState({
             ...music,
             soundObj: status,
             playbackObj: playBackObj,
@@ -18,13 +17,13 @@ const handleMusic = async (item, setMusic, music) => {
         const status = await playbackObj.setStatusAsync({
             shouldPlay: false
         })
-        return  setMusic({
+        return  updateState({
             ...music,
             soundObj: status,
         }) 
     }else if(soundObj.isLoaded && !soundObj.isPlaying && currentAudio.id === item.id) {
        const status = await  playbackObj.playAsync();
-       return  setMusic({
+       return  updateState({
            ...music,
         soundObj: status
     })
