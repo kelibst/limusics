@@ -11,7 +11,8 @@ const handleMusic = async (item, updateState, music) => {
             soundObj: status,
             playing: true,
             playbackObj: playBackObj,
-            currentAudio: item
+            currentAudio: item,
+            playingModal: true
         })
     }
 
@@ -33,7 +34,8 @@ const handleMusic = async (item, updateState, music) => {
            ...music,
         soundObj: status,
         currentAudio: item,
-        playing: true
+        playing: true,
+        playingModal: true
     })
     }
      if(soundObj.isLoaded && currentAudio.id !== item.id) {
@@ -45,6 +47,7 @@ const handleMusic = async (item, updateState, music) => {
             soundObj: status,
             currentAudio: item,
             playing: true,
+            playingModal: true
         })
     }
 }

@@ -12,9 +12,11 @@ export class AudioProvider extends Component {
       playbackObj: null,
       soundObj: null,
       currentAudio: {},
-      playing: false
+      playing: false,
+      playingModal: false,
     };
   }
+
 
   updateState= (prevState, newState) => {
     this.setState({
@@ -64,6 +66,14 @@ export class AudioProvider extends Component {
   componentDidMount() {
     this.getPermission();
   }
+  // componentDidUpdate(prevState, nextState){
+  //   if (prevState.soundObj !== nextState.soundObj) {
+  //     this.state?.soundObj?.didJustFinish && this.state?.soundObj?.isLoaded && this.setState({
+  //       ...this.state,
+  //       playing: false
+  //     })
+  //   }
+  // }
   render() {
     return (
       <AudioContext.Provider
