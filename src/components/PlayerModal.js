@@ -1,15 +1,19 @@
 import React from "react";
-import { View, Text, Modal, SafeAreaView, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, Modal, SafeAreaView, StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { AntDesign } from '@expo/vector-icons'; 
 
-const PlayerModel = ({ visible }) => {
-    
+const PlayerModel = ({ visible, propss, closeModal }) => { 
+ 
   return (
     <SafeAreaView>
-      <Modal transparent={true} visible={visible}>
+      <Modal transparent={true}  animationType="slide" visible={visible}> 
+      <TouchableWithoutFeedback  onPress={closeModal}>
+        <View style={styles.modalContainer}>
         <View style={styles.playerContent}>
+         
           <Text style={styles.albArt}>playing add shaffle</Text>
+          
           <View style={styles.musiCtrls}>
           <TouchableOpacity>
               <AntDesign
@@ -31,7 +35,7 @@ const PlayerModel = ({ visible }) => {
             </TouchableOpacity>
             <TouchableOpacity>
               <FontAwesome
-                name={"play-circle-o"}
+                name={propss?.playing ? "play-circle-o" : "pause-circle"}
                 size={80}
                 color={"blue"}
                 style={styles.playIcon}
@@ -56,8 +60,12 @@ const PlayerModel = ({ visible }) => {
             </TouchableOpacity>
 
           </View>
+         </View>
         </View>
+        
+        </TouchableWithoutFeedback>
       </Modal>
+       
     </SafeAreaView>
   );
 };
@@ -73,6 +81,7 @@ const styles = StyleSheet.create({
     width: "100%",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
+    zIndex: 2
   },
   albArt: {
     backgroundColor: "#333",
@@ -92,5 +101,14 @@ const styles = StyleSheet.create({
       borderWidth: 1,
       borderRadius: 5,
       alignItems: "center"
+  },
+  modalContainer: {
+    backgroundColor: "rgba(0,0,0,0.2)",
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+
   }
 });

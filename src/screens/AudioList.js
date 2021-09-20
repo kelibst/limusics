@@ -9,7 +9,13 @@ import Item from './Item'
 export default function AudioList() {
     const cont = useContext(AudioContext)
     const [selectedId, setSelectedId] = useState(null);
-    console.log(cont.currentState.playingModal)
+    // console.log(cont.currentState.playingModal)
+    const onCloseModal = () => {
+        updateState({
+            ...cont.currentState,
+            playingModal: false
+        })
+    }
     const { updateState } = cont
     const renderItem = ({ item }) => {
         let sel = item.id === selectedId ?  true : false;
@@ -27,7 +33,7 @@ export default function AudioList() {
             keyExtractor={item =>  item.id}
             extraData={selectedId}
             />
-            <PlayerModel visible={cont.currentState.playingModal} propss={cont} />
+            <PlayerModel visible={cont.currentState.playingModal} closeModal={onCloseModal} propss={cont} />
         </SafeAreaView>
     )
 }
