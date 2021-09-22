@@ -1,5 +1,7 @@
 import { Audio } from 'expo-av';
 const handleMusic = async (item, updateState, music) => {
+
+    
     // play the audio for the first time
     const { soundObj, playbackObj, currentAudio } = music
     if(soundObj === null ){
@@ -38,7 +40,7 @@ const handleMusic = async (item, updateState, music) => {
         playingModal: true
     })
     }
-     if(soundObj.isLoaded && currentAudio.id !== item.id) {
+     if(soundObj.isLoaded  && soundObj.isPlaying && currentAudio.id !== item.id) {
          await  playbackObj.stopAsync();
          await playbackObj.unloadAsync()
          const status = await playbackObj.loadAsync({uri: item.uri}, {shouldPlay: true})
@@ -50,6 +52,10 @@ const handleMusic = async (item, updateState, music) => {
             playingModal: true
         })
     }
+}
+
+const stopPlayingMusic = () => {
+
 }
 
 export { handleMusic }

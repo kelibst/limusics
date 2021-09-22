@@ -24,6 +24,8 @@ export class AudioProvider extends Component {
     })
   }
 
+
+
   perAlert = () => {
     Alert.alert("Permission Required!", "We need to read your audio files.", [
       {
@@ -67,12 +69,16 @@ export class AudioProvider extends Component {
     this.getPermission();
   }
   // componentDidUpdate(prevState, nextState){
-  //   if (prevState.soundObj !== nextState.soundObj) {
-  //     this.state?.soundObj?.didJustFinish && this.state?.soundObj?.isLoaded && this.setState({
+  //   if (prevState?.soundObj?.isPlaying !== nextState?.soundObj?.isPlaying) {
+  //     if (!this?.state?.soundObj?.isPlaying ) {
+  //       console.log(this?.state?.soundObj?.isPlaying )
+  //       return this.setState({
   //       ...this.state,
   //       playing: false
   //     })
   //   }
+  // }
+      
   // }
   render() {
     return (
