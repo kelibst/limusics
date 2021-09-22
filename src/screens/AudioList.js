@@ -1,4 +1,4 @@
-import React, { useContext, useState} from 'react'
+import React, { useContext,useEffect, useState} from 'react'
 import { View, Text, FlatList, SafeAreaView } from 'react-native'
 import PlayerModel from '../components/PlayerModal'
 import { handleMusic } from '../components/playMusics'
@@ -17,6 +17,17 @@ export default function AudioList() {
         })
     }
     const { updateState } = cont
+    useEffect(() => {
+        console.log(cont.currentState.soundObj)
+        !cont?.currentState?.soundObj?.isPlaying && cont.currentState.playing && updateState(cont.currentState,{
+            playing: false
+        }
+        )
+        cont?.currentState?.soundObj?.didJustFinish && cont.currentState.playing && updateState(cont.currentState,{
+            playing: false
+        }
+        )
+    }, [cont.currentState.soundObj])
     const renderItem = ({ item }) => {
         let sel = item.id === selectedId ?  true : false;
         return <Item item={item} onPress={() => {

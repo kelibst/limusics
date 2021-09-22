@@ -1,6 +1,7 @@
 import { Audio } from 'expo-av';
 const handleMusic = async (item, updateState, music) => {
 
+   
     
     // play the audio for the first time
     const { soundObj, playbackObj, currentAudio } = music
@@ -8,23 +9,22 @@ const handleMusic = async (item, updateState, music) => {
         const playBackObj = new Audio.Sound()
         const status = await playBackObj.loadAsync({uri: item.uri}, {shouldPlay: true})
     
-       return  updateState({
-            ...music,
-            soundObj: status,
+       return  updateState(music,{
+             soundObj: status,
             playing: true,
             playbackObj: playBackObj,
             currentAudio: item,
             playingModal: true
         })
     }
-
+ console.log(soundObj)
     if (soundObj.isLoaded && soundObj.isPlaying && currentAudio.id === item.id){
         // pause the audio if it is already playing and the user clicks on the same audio
         const status = await playbackObj.setStatusAsync({
             shouldPlay: false
         })  
         return  updateState({
-            ...music,
+            music,
             soundObj: status,
             playing: false,
         }) 
@@ -32,30 +32,24 @@ const handleMusic = async (item, updateState, music) => {
      if(soundObj.isLoaded && !soundObj.isPlaying && currentAudio.id === item.id) {
         // resume the audio when necessary
        const status = await  playbackObj.playAsync();
-       return  updateState({
-           ...music,
+       return  updateState(music, {
         soundObj: status,
         currentAudio: item,
         playing: true,
         playingModal: true
     })
     }
-     if(soundObj.isLoaded  && soundObj.isPlaying && currentAudio.id !== item.id) {
+     if(soundObj.isLoaded  && currentAudio.id !== item.id) {
          await  playbackObj.stopAsync();
          await playbackObj.unloadAsync()
          const status = await playbackObj.loadAsync({uri: item.uri}, {shouldPlay: true})
-         return  updateState({
-            ...music,
+         return  updateState(music,{
             soundObj: status,
             currentAudio: item,
             playing: true,
             playingModal: true
         })
     }
-}
-
-const stopPlayingMusic = () => {
-
 }
 
 export { handleMusic }

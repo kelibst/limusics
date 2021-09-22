@@ -68,18 +68,7 @@ export class AudioProvider extends Component {
   componentDidMount() {
     this.getPermission();
   }
-  // componentDidUpdate(prevState, nextState){
-  //   if (prevState?.soundObj?.isPlaying !== nextState?.soundObj?.isPlaying) {
-  //     if (!this?.state?.soundObj?.isPlaying ) {
-  //       console.log(this?.state?.soundObj?.isPlaying )
-  //       return this.setState({
-  //       ...this.state,
-  //       playing: false
-  //     })
-  //   }
-  // }
-      
-  // }
+
   render() {
     return (
       <AudioContext.Provider
