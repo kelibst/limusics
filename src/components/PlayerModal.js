@@ -18,6 +18,12 @@ import Slider from "@react-native-community/slider";
 const { width } = Dimensions.get("window");
 
 const PlayerModel = ({ visible, propss, closeModal }) => {
+  const { timers } = propss.currentState
+  const calSliderPos = () => {
+    if(timers?.playbackPosition && playbackDuration ){
+
+    }
+  }
   return (
     <SafeAreaView>
       <Modal transparent={true} animationType="slide" visible={visible}>

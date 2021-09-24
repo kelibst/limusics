@@ -17,7 +17,6 @@ const handleMusic = async (item, updateState, music) => {
             playingModal: true
         })
     }
- console.log(soundObj)
     if (soundObj.isLoaded && soundObj.isPlaying && currentAudio.id === item.id){
         // pause the audio if it is already playing and the user clicks on the same audio
         const status = await playbackObj.setStatusAsync({
