@@ -13,7 +13,6 @@ const AudioList = () => {
   const [selectedId, setSelectedId] = useState(null);
     const { updateState, currentState } = cont;
   const onPlayBackStatusUpdate = playbackStatus => {
-      console.log(currentState?.timers)
       playbackStatus?.isLoaded && playbackStatus.isPlaying && updateState(currentState, {
        timers:{
             playbackPosition: playbackStatus?.positionMillis,
@@ -28,17 +27,6 @@ const AudioList = () => {
     });
   };
 
-  
-  
-  useEffect(() => {
-    !currentState?.soundObj?.isPlaying &&
-      cont.currentState.playing &&
-      updateState(cont.currentState, {
-        playing: false,
-      });
-      // console.log(currentState?.soundObj?.isPlaying)
-   currentState?.soundObj?.isPlaying &&  currentState.playbackObj.setOnPlaybackStatusUpdate(onPlayBackStatusUpdate)
-  }, [currentState.soundObj, currentState.playbackObj]);
   const renderItem = ({ item }) => {
     let sel = item.id === selectedId ? true : false;
     return (
@@ -54,6 +42,17 @@ const AudioList = () => {
       />
     );
   };
+  
+  useEffect(() => {
+    !currentState?.soundObj?.isPlaying &&
+      cont.currentState.playing &&
+      updateState(cont.currentState, {
+        playing: false,
+      });
+      // console.log(currentState?.soundObj?.isPlaying)
+   currentState?.soundObj?.isPlaying &&  currentState.playbackObj.setOnPlaybackStatusUpdate(onPlayBackStatusUpdate)
+  }, [currentState.soundObj, currentState.playbackObj]);
+ 
   
   return (
     <SafeAreaView style={globalStyles.container}>
@@ -73,4 +72,4 @@ const AudioList = () => {
   );
 }
 
-export default AudioList
+export default (AudioList)

@@ -20,8 +20,10 @@ const { width } = Dimensions.get("window");
 const PlayerModel = ({ visible, propss, closeModal }) => {
   const { timers } = propss.currentState
   const calSliderPos = () => {
-    if(timers?.playbackPosition && playbackDuration ){
-
+    if(timers?.playbackPosition && timers?.playbackDuration ){
+      return timers?.playbackPosition / timers?.playbackDuration
+    }else {
+      return 0
     }
   }
   return (
@@ -41,6 +43,7 @@ const PlayerModel = ({ visible, propss, closeModal }) => {
                   style={{ width: width - 40, height: 40 }}
                   minimumValue={0}
                   maximumValue={1}
+                  value={calSliderPos()}
                   minimumTrackTintColor="#FFFFFF"
                   maximumTrackTintColor="#000000"
                 />
