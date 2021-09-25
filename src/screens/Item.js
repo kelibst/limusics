@@ -19,4 +19,15 @@ const Item = ({ item, onPress, sel, isPlaying }) => {
   )};
 
 
-export default Item
+  const areEqual = (prevProps, nextProps) => {
+
+  
+    const { isSelected } = nextProps;
+    const { isSelected: prevIsSelected } = prevProps;
+    
+    /*if the props are equal, it won't update*/
+    const isSelectedEqual = isSelected === prevIsSelected;  
+    return isSelectedEqual;
+  };
+
+export default React.memo(Item, areEqual)

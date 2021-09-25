@@ -7,6 +7,8 @@ import { globalStyles } from "../styles/globalStyles";
 import Item from "./Item";
 
 const AudioList = () => {
+  
+
   const cont = useContext(AudioContext);
   const [selectedId, setSelectedId] = useState(null);
     const { updateState, currentState } = cont;
@@ -26,15 +28,7 @@ const AudioList = () => {
     });
   };
 
-  const areEqual = (prevProps, nextProps) => {
-    const { isSelected } = nextProps;
-    const { isSelected: prevIsSelected } = prevProps;
-    
-    /*if the props are equal, it won't update*/
-    const isSelectedEqual = isSelected === prevIsSelected;
   
-    return isSelectedEqual;
-  };
   
   useEffect(() => {
     !currentState?.soundObj?.isPlaying &&
@@ -42,17 +36,17 @@ const AudioList = () => {
       updateState(cont.currentState, {
         playing: false,
       });
-      console.log(currentState?.soundObj?.isPlaying)
-//    currentState?.soundObj?.isPlaying &&  currentState.playbackObj.setOnPlaybackStatusUpdate(onPlayBackStatusUpdate)
+      // console.log(currentState?.soundObj?.isPlaying)
+   currentState?.soundObj?.isPlaying &&  currentState.playbackObj.setOnPlaybackStatusUpdate(onPlayBackStatusUpdate)
   }, [currentState.soundObj, currentState.playbackObj]);
   const renderItem = ({ item }) => {
-      console.log("running renderItem")
     let sel = item.id === selectedId ? true : false;
     return (
       <Item
         item={item}
         onPress={() => {
           setSelectedId(item.id);
+          console.log("render item")
           handleMusic(item, updateState, cont.currentState);
         }}
         sel={sel}
@@ -79,4 +73,4 @@ const AudioList = () => {
   );
 }
 
-export default React.memo(AudioList, areEqual)
+export default AudioList
