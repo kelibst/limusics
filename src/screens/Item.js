@@ -6,7 +6,7 @@ import { autoGenHex, convertMinsToHrsMins, getThumbNail } from '../funtionalitie
 
 const Item = ({ item, onPress, sel, isPlaying }) => { 
   return (
-    <TouchableOpacity onPress={onPress} style={[globalStyles.itemStyle, sel && {borderWidth: 1, borderColor: "blue"}]}>
+    <TouchableOpacity onPress={onPress} style={[globalStyles.itemStyle, sel && {borderWidth: 1, borderColor: "#1370c1"}]}>
       <View  style={[globalStyles.thumb, autoGenHex()]}><Text style={globalStyles.thumbnail}>{getThumbNail(item.filename)}</Text></View>
       <View style={globalStyles.itemCont}>
         <Text numberOfLines={1}  style={globalStyles.title}>{item.filename}</Text>
@@ -14,7 +14,7 @@ const Item = ({ item, onPress, sel, isPlaying }) => {
       </View>
       
       
-      <FontAwesome name={isPlaying && sel ? "pause-circle" : "play-circle-o"} size={34} color={sel ? "blue" : "black"} style={globalStyles.playIcon}/>
+      <FontAwesome name={isPlaying && sel ? "pause-circle" : "play-circle-o"} size={34} color={sel ? "#1370c1" : "black"} style={globalStyles.playIcon}/>
     </TouchableOpacity>
   )};
 

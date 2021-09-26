@@ -7,8 +7,6 @@ import { globalStyles } from "../styles/globalStyles";
 import Item from "./Item";
 
 const AudioList = () => {
-  
-
   const cont = useContext(AudioContext);
   const [selectedId, setSelectedId] = useState(null);
     const { updateState, currentState } = cont;
@@ -16,13 +14,13 @@ const AudioList = () => {
       playbackStatus?.isLoaded && playbackStatus.isPlaying && updateState(currentState, {
        timers:{
             playbackPosition: playbackStatus?.positionMillis,
-        playbackDuration: playbackStatus?.durationMillis,
+            playbackDuration: playbackStatus?.durationMillis,
        }
       })
   }
 
   const onCloseModal = () => {
-    updateState(currentState,{
+    currentState?.playingModal && updateState(cont.currentState,{
       playingModal: false,
     });
   };
@@ -34,7 +32,6 @@ const AudioList = () => {
         item={item}
         onPress={() => {
           setSelectedId(item.id);
-          console.log("render item")
           handleMusic(item, updateState, cont.currentState);
         }}
         sel={sel}
@@ -44,6 +41,7 @@ const AudioList = () => {
   };
   
   useEffect(() => {
+   
     !currentState?.soundObj?.isPlaying &&
       cont.currentState.playing &&
       updateState(cont.currentState, {

@@ -32,7 +32,7 @@ const PlayerModel = ({ visible, propss, closeModal }) => {
         <TouchableWithoutFeedback onPress={closeModal}>
           <View style={styles.modalContainer}>
             <View style={styles.playerContent}>
-              <Text style={styles.albArt}>
+              <Text style={[styles.albArt,  propss?.currentState?.playing ? {borderWidth: 1, borderColor: "#1370c1"} : {borderWidth: 1}]}>
                 <Ionicons name="musical-notes" size={44} color="white" />
               </Text>
               <Text numberOfLines={1} style={styles.title}>
@@ -44,7 +44,7 @@ const PlayerModel = ({ visible, propss, closeModal }) => {
                   minimumValue={0}
                   maximumValue={1}
                   value={calSliderPos()}
-                  minimumTrackTintColor="#FFFFFF"
+                  minimumTrackTintColor="#1370c1"
                   maximumTrackTintColor="#000000"
                 />
                 <View style={styles.musiCtrls}>
@@ -81,7 +81,7 @@ const PlayerModel = ({ visible, propss, closeModal }) => {
                           : "play-circle-o"
                       }
                       size={80}
-                      color={propss?.currentState?.playing ? "black" : "black"}
+                      color={propss?.currentState?.playing ? "#1370c1" : "black"}
                       style={styles.playIcon}
                     />
                   </TouchableOpacity>
