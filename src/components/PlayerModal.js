@@ -18,28 +18,35 @@ import Slider from "@react-native-community/slider";
 const { width } = Dimensions.get("window");
 
 const PlayerModel = ({ visible, propss, closeModal }) => {
-  const { timers } = propss.currentState
+  const { timers } = propss.currentState;
   const calSliderPos = () => {
-    if(timers?.playbackPosition && timers?.playbackDuration ){
-      return timers?.playbackPosition / timers?.playbackDuration
-    }else {
-      return 0
+    if (timers?.playbackPosition && timers?.playbackDuration) {
+      return timers?.playbackPosition / timers?.playbackDuration;
+    } else {
+      return 0;
     }
-  }
+  };
   return (
     <SafeAreaView>
       <Modal transparent={true} animationType="slide" visible={visible}>
         <TouchableWithoutFeedback onPress={closeModal}>
           <View style={styles.modalContainer}>
             <View style={styles.playerContent}>
-              <Text style={[styles.albArt,  propss?.currentState?.playing ? {borderWidth: 1, borderColor: "#1370c1"} : {borderWidth: 1}]}>
-                <Ionicons name="musical-notes" size={44} color="white" />
+              <Text
+                style={[
+                  styles.albArt,
+                  propss?.currentState?.playing
+                    ? { borderWidth: 1, borderColor: "#1370c1" }
+                    : { borderWidth: 1 },
+                ]}
+              >
+                <Ionicons name="musical-notes" size={44} color={propss?.currentState?.playing ? "#1370c1" : "black"} />
               </Text>
               <Text numberOfLines={1} style={styles.title}>
                 {propss?.currentState?.currentAudio.filename}
               </Text>
               <View style={styles.mCtrls}>
-              <Slider
+                <Slider
                   style={{ width: width - 40, height: 40 }}
                   minimumValue={0}
                   maximumValue={1}
@@ -49,19 +56,20 @@ const PlayerModel = ({ visible, propss, closeModal }) => {
                 />
                 <View style={styles.musiCtrls}>
                   <TouchableOpacity>
+                    {/* <Ionicons name="play-skip-back-sharp" size={30} color="black" /> */}
                     <AntDesign
                       name={"banckward"}
-                      size={40}
-                      color={"black"}
+                      size={30}
+                      color={propss?.currentState?.playing ? "#1370c1" : "black"}
                       style={styles.playIcon}
                     />
                   </TouchableOpacity>
 
                   <TouchableOpacity>
-                    <AntDesign
-                      name={"leftcircle"}
-                      size={40}
-                      color={"black"}
+                    <Ionicons
+                      name="play-skip-back-sharp"
+                      size={30}
+                      color={propss?.currentState?.playing ? "#1370c1" : "black"}
                       style={styles.playIcon}
                     />
                   </TouchableOpacity>
@@ -81,15 +89,17 @@ const PlayerModel = ({ visible, propss, closeModal }) => {
                           : "play-circle-o"
                       }
                       size={80}
-                      color={propss?.currentState?.playing ? "#1370c1" : "black"}
+                      color={
+                        propss?.currentState?.playing ? "#1370c1" : "black"
+                      }
                       style={styles.playIcon}
                     />
                   </TouchableOpacity>
                   <TouchableOpacity>
-                    <AntDesign
-                      name={"rightcircle"}
-                      size={40}
-                      color={"black"}
+                    <Ionicons
+                      name="play-skip-forward"
+                      size={24}
+                      color={propss?.currentState?.playing ? "#1370c1" : "black"}
                       style={styles.playIcon}
                     />
                   </TouchableOpacity>
@@ -97,13 +107,12 @@ const PlayerModel = ({ visible, propss, closeModal }) => {
                   <TouchableOpacity>
                     <AntDesign
                       name={"forward"}
-                      size={40}
-                      color={"black"}
+                      size={30}
+                      color={propss?.currentState?.playing ? "#1370c1" : "black"}
                       style={styles.playIcon}
                     />
                   </TouchableOpacity>
                 </View>
-               
               </View>
             </View>
           </View>
@@ -127,7 +136,7 @@ const styles = StyleSheet.create({
     zIndex: 2,
   },
   albArt: {
-    backgroundColor: "black",
+    // backgroundColor: "black",
     padding: 50,
     borderRadius: 100,
     justifyContent: "center",
@@ -157,7 +166,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginVertical: 20,
   },
-  mCtrls: {
-    
-  },
+  mCtrls: {},
 });

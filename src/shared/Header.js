@@ -1,25 +1,29 @@
-import React from "react";
-import { StyleSheet, View, Text, SafeAreaView, StatusBar } from "react-native";
+import React, {useContext} from "react";
+import { StyleSheet, View, Text, SafeAreaView, StatusBar, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import { getHeaderTitle } from '@react-navigation/elements';
+import { FontAwesome } from '@expo/vector-icons'; 
+import { AudioContext } from "../context/AudioProvider";
 
-const Header = () => {
+const Header = ({route, options,}) => {
+    const title = getHeaderTitle(options, route.name);
+    const cont = useContext(AudioContext);
   const pressHandler = () => {
-    // navigation.openDrawer()
-    console.log("working");
+    cont.updateState(cont.currentState, {
+        playingModal: true,
+    })
   };
   return (
     <SafeAreaView>
         <StatusBar />
       <View style={styles.header}>
-        <MaterialIcons
-          name="menu"
-          size={28}
-          onPress={pressHandler}
-          style={styles.icon}
-        />
+        
         <View>
-          <Text style={styles.headerText}>some text</Text>
+          <Text style={styles.headerText}>{title}</Text>
         </View>
+        <TouchableOpacity onPress={pressHandler}>
+        <FontAwesome name="play-circle" size={34} style={styles.icon} color="black" />
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -29,7 +33,8 @@ export default Header;
 const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-between",
+    alignItems: "center",
     backgroundColor: "white",
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
@@ -41,10 +46,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#333",
     letterSpacing: 1,
-    marginVertical: 10
+    marginVertical: 15,
+    paddingLeft: 20,
   },
   icon: {
-    position: "absolute",
-    left: 16,
+   alignSelf: "center",
+   paddingRight: 20
   },
 });

@@ -41,15 +41,18 @@ const AudioList = () => {
   };
   
   useEffect(() => {
-   
+   console.log(currentState.currentAudio, currentState?.currentAudio.length === 0 )
     !currentState?.soundObj?.isPlaying &&
       cont.currentState.playing &&
       updateState(cont.currentState, {
         playing: false,
       });
       // console.log(currentState?.soundObj?.isPlaying)
+      Object.keys(currentState?.currentAudio).length === 0 && currentState.playingModal && updateState(currentState, {
+        currentAudio: currentState?.audioFiles[0]
+      })
    currentState?.soundObj?.isPlaying &&  currentState.playbackObj.setOnPlaybackStatusUpdate(onPlayBackStatusUpdate)
-  }, [currentState.soundObj, currentState.playbackObj]);
+  }, [currentState.soundObj, currentState.playbackObj, currentState?.currentAudio]);
  
   
   return (
