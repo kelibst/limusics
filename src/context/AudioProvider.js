@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Alert, Text, View } from "react-native";
 import * as MediaLibrary from "expo-media-library";
 import { createContext } from "react/cjs/react.production.min";
-import { DataProvider } from "recyclerlistview";
 
 export const AudioContext = createContext();
 export class AudioProvider extends Component {
@@ -10,7 +9,6 @@ export class AudioProvider extends Component {
     super(props);
     this.state = {
       audioFiles: [],
-      dataProvider: new DataProvider((r1, r2) => r1 !== r2), 
       playbackObj: null,
       soundObj: null,
       currentAudio: {},
@@ -24,7 +22,7 @@ export class AudioProvider extends Component {
   }
 
 
-  updateState= (prevState, newState) => {
+  updateState = (prevState, newState) => {
     this.setState({
       ...prevState, ...newState
     })
@@ -46,7 +44,7 @@ export class AudioProvider extends Component {
   };
 
   getAudioFiles = async () => {
-    const { dataProvider, audioFiles } = this.state;
+    const { audioFiles } = this.state;
     let media = await MediaLibrary.getAssetsAsync({
       mediaType: "audio",
     });

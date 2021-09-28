@@ -20,9 +20,13 @@ const AudioList = () => {
   }
 
   const onCloseModal = () => {
-    currentState?.playingModal && updateState(cont.currentState,{
-      playingModal: false,
-    });
+    console.log("modal",currentState?.soundObj?.isPlaying)
+    if (currentState?.playingModal) {
+      updateState(currentState,{
+        playingModal: false,
+      });
+    }
+    
   };
 
   const renderItem = ({ item }) => {
@@ -32,34 +36,33 @@ const AudioList = () => {
         item={item}
         onPress={() => {
           setSelectedId(item.id);
-          handleMusic(item, updateState, cont.currentState);
+          handleMusic(item, updateState, currentState);
         }}
         sel={sel}
-        isPlaying={cont.currentState.playing}
+        isPlaying={currentState.playing}
       />
     );
   };
   
   useEffect(() => {
-   console.log(currentState.currentAudio, currentState?.currentAudio.length === 0 )
+   console.log( currentState?.playing, "playingModal")
     !currentState?.soundObj?.isPlaying &&
       cont.currentState.playing &&
-      updateState(cont.currentState, {
+      updateState(currentState, {
         playing: false,
       });
-      // console.log(currentState?.soundObj?.isPlaying)
       Object.keys(currentState?.currentAudio).length === 0 && currentState.playingModal && updateState(currentState, {
         currentAudio: currentState?.audioFiles[0]
       })
    currentState?.soundObj?.isPlaying &&  currentState.playbackObj.setOnPlaybackStatusUpdate(onPlayBackStatusUpdate)
-  }, [currentState.soundObj, currentState.playbackObj, currentState?.currentAudio]);
+  }, [currentState.soundObj, currentState.playbackObj, currentState?.playingModal]);
  
   
   return (
     <SafeAreaView style={globalStyles.container}>
       <FlatList
         data={currentState.audioFiles}
-        initialNumToRender={5}
+        initialNumToRender={10}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
         extraData={selectedId}

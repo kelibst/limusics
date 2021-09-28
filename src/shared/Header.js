@@ -8,7 +8,9 @@ import { AudioContext } from "../context/AudioProvider";
 const Header = ({route, options,}) => {
     const title = getHeaderTitle(options, route.name);
     const cont = useContext(AudioContext);
+
   const pressHandler = () => {
+    console.log("press handleer reached")
     cont.updateState(cont.currentState, {
         playingModal: true,
     })

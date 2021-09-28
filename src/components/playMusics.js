@@ -1,15 +1,17 @@
 import { Audio } from 'expo-av';
-const handleMusic = async (item, updateState, music) => {
 
-   
+
+const handleMusic = async (item, updateState, currentState) => {
     
     // play the audio for the first time
-    const { soundObj, playbackObj, currentAudio } = music
-    if(soundObj === null ){
+    const { soundObj, playbackObj, currentAudio } = currentState
+    
+    console.log("handlemusic",soundObj?.isPlaying)
+    if(soundObj === null && Object.keys(currentAudio).length === 0){
         const playBackObj = new Audio.Sound()
         const status = await playBackObj.loadAsync({uri: item.uri}, {shouldPlay: true})
-    
-       return  updateState(music,{
+    // console.log(status, "status")
+       return  updateState(currentState,{
              soundObj: status,
             playing: true,
             playbackObj: playBackObj,
@@ -22,8 +24,7 @@ const handleMusic = async (item, updateState, music) => {
         const status = await playbackObj.setStatusAsync({
             shouldPlay: false
         })  
-        return  updateState({
-            music,
+        return  updateState(currentState,{
             soundObj: status,
             playing: false,
         }) 
@@ -31,7 +32,7 @@ const handleMusic = async (item, updateState, music) => {
      if(soundObj.isLoaded && !soundObj.isPlaying && currentAudio.id === item.id) {
         // resume the audio when necessary
        const status = await  playbackObj.playAsync();
-       return  updateState(music, {
+       return  updateState(currentState, {
         soundObj: status,
         currentAudio: item,
         playing: true,
@@ -42,7 +43,7 @@ const handleMusic = async (item, updateState, music) => {
          await  playbackObj.stopAsync();
          await playbackObj.unloadAsync()
          const status = await playbackObj.loadAsync({uri: item.uri}, {shouldPlay: true})
-         return  updateState(music,{
+         return  updateState(currentState,{
             soundObj: status,
             currentAudio: item,
             playing: true,
